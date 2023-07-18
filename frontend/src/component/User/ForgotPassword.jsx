@@ -6,13 +6,13 @@ import MetaData from '../layout/MetaData';
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, forgotPassword} from "../../actions/userAction";
 import { useAlert } from "react-alert";
-import { useNavigate } from 'react-router-dom';
+
 
 
 
 function ForgotPassword() {
 
-    const navigate = useNavigate();
+    
     const dispatch = useDispatch();
     const alert = useAlert();
         

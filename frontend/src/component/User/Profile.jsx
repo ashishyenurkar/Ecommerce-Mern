@@ -27,7 +27,7 @@ useEffect(() => {
           <div className='profileContainer'>
               <div>
                   <h1>My Profile</h1>
-                  <img src={ user ? user.avatar.url :"/Profile.png"} alt={"user.name"} />
+                  <img src={user.avatar.url ? user.avatar.url :"/Profile.png"} alt={"User"} />
                   <Link to="/me/update">Edit Profile</Link>
               </div>
               <div>

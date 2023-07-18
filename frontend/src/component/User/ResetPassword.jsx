@@ -17,13 +17,12 @@ function ResetPassword() {
 
     //Navigate to the diff route after login.
   const { token } = useParams()
-  console.log("token", token);
 const navigate = useNavigate();
 const dispatch = useDispatch();
 const alert = useAlert();
     
-    const { success,loading,error} = useSelector((state) => state.forgotPassword);
-  
+  const { error, success, loading } = useSelector((state) => state.forgotPassword);
+ 
  
     const [Password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("")
@@ -33,8 +32,9 @@ const alert = useAlert();
         e.preventDefault();
       
         const myForm = new FormData();
-        myForm.set("Password", Password);
-        myForm.set("confirmPassword", confirmPassword);
+        myForm.set("password", Password);
+      myForm.set("confirmPassword", confirmPassword);
+      console.log("success:-",success)
       dispatch(resetPassword(token, myForm));
       }
       
@@ -62,7 +62,7 @@ const alert = useAlert();
         <MetaData title={"Reste password"}/>
       <div className='resetPasswordContainer'>
         <div className='resetPasswordBox'>
-          <h2 className='resetPasswordHeading'>Update Profile</h2>
+          <h2 className='resetPasswordHeading'>Reset Password</h2>
         <form
                 className="resetPasswordForm"
                 onSubmit={resetPasswordSubmit}

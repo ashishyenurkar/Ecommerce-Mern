@@ -150,11 +150,12 @@ export const forgotPassword = (email) => async (dispatch) => {
 //Reset Password Action
 export const resetPassword = (token, passwords) => async (dispatch) => {
     try {
+        console.log("token:-", "passwords:-", passwords);
         dispatch({ type: RESET_PASSWORD_REQUEST });
 
         const config = { headers: { "Content-Type": "application/json" } };
 
-        const { data } = await axios.post(`/api/v1/password/reset/${token}`, passwords, config);
+        const { data } = await axios.put(`/api/v1/password/reset/${token}`, passwords, config);
 
         dispatch({ type: RESET_PASSWORD_SUCCESS, payload: data.success });
     } catch (error) {

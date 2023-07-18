@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import "./ProductCard.css"
 import ReactStars from
   "react-rating-stars-component";
+  import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 
 
 
@@ -26,7 +27,7 @@ function ProductCard({ product }) {
         <div>
           <ReactStars {...options}/> <span>({product.numOfReviews} Reviews)</span>
         </div>
-        <span>{`Rs ${product.price}`}</span>
+        <span><CurrencyRupeeIcon />{`${product.price}`}</span>
         </Link>
        
   )

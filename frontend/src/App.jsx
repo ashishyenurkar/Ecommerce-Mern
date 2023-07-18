@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import './App.css';
 import Header from "./component/layout/Header/Header.js"
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -18,22 +18,47 @@ import UpdateProfile from "./component/User/UpdateProfile.jsx";
 import UpdatePassword from "./component/User/UpdatePassword.jsx";
 import ForgotPassword from "./component/User/ForgotPassword.jsx";
 import ResetPassword from "./component/User/ResetPassword.jsx";
-
-
+import Cart from "./component/Cart/Cart.jsx";
+import Shipping from "./component/Cart/Shipping.jsx";
+import ConfirmOrder from "./component/Cart/ConfirmOrder.jsx"
+import Payment from "./component/Cart/Payment.jsx"
+import axios from 'axios';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import OrderSuccess from "./component/Cart/OrderSuccess.jsx";
+import Myorders from "./component/Orders/Myorders.jsx"
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
+  const [stripeApiKey, setStripeApiKey] = useState("");
+
+  async function getStripeApiKey() {
+    
+    try {
+      const { data } = await axios.get("/api/v1/stripeapikey");
+      console.log("data", data);
+      setStripeApiKey(data.stripeApiKey);
+    } catch (error) {
+      console.error("Error fetching stripe API key:", error);
+    }
+  }
+ 
+
 
   useEffect(() => {
-    webfont.load({
+  webfont.load({
       google: {
-        families: ["Roboto", "Droid sans", "Chilanka"]
-      }
-    })
+        families: ["Roboto", "Droid sans", "Chilanka"],
+      },
+    });
     store.dispatch(loadUser());
+    getStripeApiKey() 
+   
   }, []);
+  console.log("stripeApiKey",stripeApiKey)
   return (
     <Fragment>
+       <Elements stripe={loadStripe(stripeApiKey)}>
       <Router>
         <Header />
         {isAuthenticated && <UserOptions user={user} />}
@@ -49,12 +74,24 @@ function App() {
           <Route exact path="/password/update" element={<UpdatePassword />} />
           <Route exact path="/password/forgot" element={<ForgotPassword />} />
           <Route exact path="/password/reset/:token" element={<ResetPassword />} />
+          <Route exact path="/cart" element={<Cart />} />
+          <Route exact path="/login/shipping" element={<Shipping />} />
+          <Route exact path="/order/confirm" element={<ConfirmOrder />} />
+            <Route exact path="/order/confirm/process/payment" element={<Payment />} />
+            <Route exact path="/success" element={< OrderSuccess />} />
+            <Route exact path="/orders" element={<Myorders />} />
           
+         
+
+
+
         </Routes>
         <Footer/>
-      </Router>
+        </Router>
+        </Elements>
 </Fragment>
   );
 }
 
 export default App;
+

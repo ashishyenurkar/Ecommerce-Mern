@@ -42,7 +42,7 @@ function UserOptions({ user }) {
 
     //SpeedDial Functions.
     function dashboard() {
-        navigate("/dashboard")
+        navigate("/admin/dashboard")
     }
     function orders() {
         navigate("/orders")

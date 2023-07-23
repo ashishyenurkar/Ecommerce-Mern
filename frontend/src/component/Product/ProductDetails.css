@@ -46,11 +46,7 @@
     padding: 1vmax 0;
 }
 
-.detailsBlock-2 > span{
-    color:rgba(54,54,54,0.582);
-    font:200 0.6vmax cursive;
 
-}
 .detailsBlock-3{
     width: 70%;
 }
@@ -141,6 +137,17 @@
     background-color: rgb(197,68,45);
     transform: scale(1.1);
 }
+.submitDialog{
+    display:flex;
+    flex-direction:column;
+}
+.submitDialogTextArea{
+    border: 1px solid rgba(0,0,0,0.882);
+    margin: 1vmax;
+    outline: none;
+    padding: 1rem;
+    font: 300 1rem "Roboto";
+}
 
 .reviewsHeading{
     color:rgb(43, 42, 42);
@@ -179,7 +186,7 @@
     font: 600 0.9vmax "Roboto";
 }
 
-.reviewCard > span{
+.reviewCardComent{
     color: rgba(0,0,0, 0.445);
     font: 300 0.8vmax cursive;
 }
@@ -254,6 +261,13 @@ width: 4vmax;
     padding: 1.5vmax;
     width: 20vmax;
     margin: 3vmax;
+}
+.reviewCard > p{
+    font: 600 3vw "Roboto";
+
+}
+.reviewCardComent{
+    font: 300 5vw cursive;
 }
 
 }

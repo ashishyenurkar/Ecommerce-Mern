@@ -1,8 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import "./ProductCard.css"
-import ReactStars from
-  "react-rating-stars-component";
+import { Rating } from '@mui/material';
   import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 
 
@@ -12,12 +11,10 @@ import ReactStars from
 function ProductCard({ product }) {
   
   const options = {
-    edit: false,
-    color: "rgba(20,20,20,0.1)",
-    activeColor: "tomato",
-    size: window.innerWidth < 60 ? 20 : 25,
-    value :product.ratings,
-    isHalf:true,
+    size: "large",
+    value: product.ratings,
+    readOnly: true,
+    precision:0.5,
   }
   return (
      
@@ -25,7 +22,7 @@ function ProductCard({ product }) {
         <img src={`${product.images[0].url}`} alt={product.name} /> 
         <p>{product.name}</p>
         <div>
-          <ReactStars {...options}/> <span>({product.numOfReviews} Reviews)</span>
+          <Rating {...options}/> <span className='productCardSpan'>({product.numOfReviews} Reviews)</span>
         </div>
         <span><CurrencyRupeeIcon />{`${product.price}`}</span>
         </Link>

@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import './App.css';
 import Header from "./component/layout/Header/Header.js"
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Routes,Route} from 'react-router-dom';
 import webfont from "webfontloader";
 import Footer from './component/layout/Footer/Footer';
 import Home from "./component/Home/Home.jsx"
@@ -27,6 +27,8 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import OrderSuccess from "./component/Cart/OrderSuccess.jsx";
 import Myorders from "./component/Orders/Myorders.jsx"
+import OrderDetails from "./component/Orders/OrderDetails.jsx"
+import Dashboard from "./component/admin/dashboard.js"
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -55,7 +57,9 @@ function App() {
     getStripeApiKey() 
    
   }, []);
-  console.log("stripeApiKey",stripeApiKey)
+
+  
+ 
   return (
     <Fragment>
        <Elements stripe={loadStripe(stripeApiKey)}>
@@ -75,11 +79,16 @@ function App() {
           <Route exact path="/password/forgot" element={<ForgotPassword />} />
           <Route exact path="/password/reset/:token" element={<ResetPassword />} />
           <Route exact path="/cart" element={<Cart />} />
-          <Route exact path="/login/shipping" element={<Shipping />} />
-          <Route exact path="/order/confirm" element={<ConfirmOrder />} />
+            <Route exact path="/login/shipping" element={<Shipping />} />
             <Route exact path="/order/confirm/process/payment" element={<Payment />} />
+         
+          
             <Route exact path="/success" element={< OrderSuccess />} />
             <Route exact path="/orders" element={<Myorders />} />
+
+            <Route exact path="/order/confirm" element={<ConfirmOrder />} />
+            <Route exact path="/order/:id" element={<OrderDetails />} />
+            <Route exact path="/admin/dashboard" element={<Dashboard />} />
           
          
 

@@ -23,25 +23,25 @@ useEffect(() => {
     return (
       <Fragment>
             {loading ? <Loader/> :(<Fragment>
-          <MetaData title={user ? `${user.name}'s Profile`:"Logine please"} />
+          <MetaData title={user && user ? `${user.name}'s Profile`:"Logine please"} />
           <div className='profileContainer'>
               <div>
                   <h1>My Profile</h1>
-                  <img src={user.avatar.url ? user.avatar.url :"/Profile.png"} alt={"User"} />
+                  <img src={user && user.avatar.url ? user.avatar.url :"/Profile.png"} alt={"User"} />
                   <Link to="/me/update">Edit Profile</Link>
               </div>
               <div>
                   <div>
                       <h4>Full Name</h4>
-                      <p>{user ? `${user.name}'s Profile`:"Logine please"}</p>
+                      <p>{user && user ? `${user.name}'s Profile`:"Logine please"}</p>
                   </div>
                   <div>
                       <h4>Email</h4>
-                      <p>{user ? `${user.email}'s Profile`:"Logine please"}</p>
+                      <p>{user && user ? `${user.email}'s Profile`:"Logine please"}</p>
                   </div>
                   <div>
                       <h4>Joined On</h4>
-                      <p>{user ? `${String(user.createdAt).substr(0,10)}'s Profile`:"Logine please"}</p>
+                      <p>{ user && user ? `${String(user.createdAt).substr(0,10)}'s Profile`:"Logine please"}</p>
                   </div>
                   <div>
                       <Link to="/orders">My Orders</Link>

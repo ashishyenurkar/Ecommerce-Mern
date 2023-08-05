@@ -63,8 +63,10 @@ function Products() {
               <MetaData title="PRODUCTS---ECOMMERCE"/>
               <h2 className='productsHeading'>Products</h2>
 
-              <div className='products'>{
+              <div className='products'> {
+                  products && products.length === 0 ? <Typography>No Products</Typography> :
                   products && products.map((product) => (
+                      
                   <ProductCard key={product._id} product={product} />
                   ))}
               </div>
@@ -108,8 +110,8 @@ function Products() {
 
 
 
-              {resultPerPage < productsCount && (
-                   <div className='pagination'>
+              { resultPerPage < productsCount && (
+                    <div className='pagination'>
                    <Pagination
                        activePage={currentPage}
                        itemsCountPerPage={resultPerPage}

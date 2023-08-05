@@ -3,10 +3,10 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { newReviewReducer, productDetailsReducer, productReducers } from './reducers/prductReducers';
-import { forgotPasswordReducer, profileReducer, userReducer } from './reducers/userReducer';
+import { newProductReducer, newReviewReducer, productDetailsReducer, productReducer, productReviewReducer, productsReducers, reviewReducer } from './reducers/prductReducers';
+import { allUsersReducer, forgotPasswordReducer, profileReducer, userDetailsReducer, userReducer } from './reducers/userReducer';
 import { cartReducer } from './reducers/cartReducer';
-import { myOrdersReducer, newOrderReducer, orderDetailsReducer } from './reducers/orderReducer';
+import { allOrdersReducer, myOrdersReducer, newOrderReducer, orderDetailsReducer, orderReducer } from './reducers/orderReducer';
 
 const persistConfig = {
   key: 'root',
@@ -14,7 +14,7 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  products: productReducers,
+  products: productsReducers,
   productDetails: productDetailsReducer,
   user: userReducer,
   profile: profileReducer,
@@ -23,7 +23,15 @@ const rootReducer = combineReducers({
   newOrder: newOrderReducer,
   myOrders: myOrdersReducer,
   orderDetails: orderDetailsReducer,
-  newReview:newReviewReducer,
+  newReview: newReviewReducer,
+  newProduct: newProductReducer,
+  product: productReducer,
+  allOrders: allOrdersReducer,
+  order: orderReducer,
+  allUsers: allUsersReducer,
+  useDetails: userDetailsReducer,
+  productReviews: productReviewReducer,
+  review:reviewReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

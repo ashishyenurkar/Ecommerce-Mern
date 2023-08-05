@@ -3,6 +3,9 @@
   margin: 0;
   scroll-behavior: smooth;
 }
+body{
+  cursor: url("./images/cursor.png"),auto;
+}
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button{
@@ -11,7 +14,7 @@ input::-webkit-inner-spin-button{
 }
 
 
-input[type="number"]{
+input[type="number"] {
   -moz-appearance: textfield;
 }
 

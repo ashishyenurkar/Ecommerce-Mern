@@ -36,17 +36,17 @@ function OrderDetails() {
                       <div className='orderDetailsContainerBox'>
                           <div>
                               <p>Name:</p>
-                              <span>{order.user && order.user.name}</span>
+                              <span>{order && order.user.name}</span>
                           </div> 
                           <div>
                               <p>Phone:</p>
-                              <span>{order.shippingInfo && order.shippingInfo.phoneNo}</span>
+                              <span>{order && order.shippingInfo.phoneNo}</span>
                           </div>
                           <div>
                               <p>Address</p>
                               <span>
                                   {
-                                      order.shippingInfo &&
+                                      order &&
                                       `${order.shippingInfo.address}, ${order.shippingInfo.city},${order.shippingInfo.state},${order.shippingInfo.pinCode},${order.shippingInfo.country}`
                                   }
                               </span>
@@ -55,11 +55,11 @@ function OrderDetails() {
                       <Typography>Payment</Typography>
                       <div className='orderDetailsContainer'>
                           <div>
-                          <p className={order.paymentInfo && order.paymentInfo.status==="succeeded"?"greenColor":"redColor"}>{order.paymentInfo && order.paymentInfo.status=== "succeeded" ? "PAID": "NOT PAID"}</p>
+                          <p className={order && order.paymentInfo.status==="succeeded"?"greenColor":"redColor"}>{order && order.paymentInfo.status=== "succeeded" ? "PAID": "NOT PAID"}</p>
                           </div> 
                           <div>
                               <p>Ammount</p>
-                              <span>{ order.paymentInfo && order.totalPrice}</span>
+                              <span>{ order && order.totalPrice}</span>
                           </div>
                       </div>
 
@@ -67,9 +67,9 @@ function OrderDetails() {
                       <div className='orderDetailsContainerBox'>
                           <div>
                               <p
-                              className = {order.orderStatus && order.orderStatus === "Delivered" ? "greenColor":"redColor"}
+                              className = {order && order.orderStatus === "Delivered" ? "greenColor":"redColor"}
                               >
-                                  {order.orderStatus && order.orderStatus}
+                                  {order && order.orderStatus}
                               </p>
                           </div>  
                       </div>
@@ -77,7 +77,7 @@ function OrderDetails() {
                   </div>
                   <div className='orderDetailsCartItems'>
                       <Typography>Order Items: </Typography>
-                      <div className='orderDetailsCartItemsContainer'>{order.orderItems && order.orderItems.map((item) => (
+                      <div className='orderDetailsCartItemsContainer'>{order && order.orderItems.map((item) => (
                           <div key={item.product}>
                               <img src={item.image} alt="product" />
                               <Link to={`/product/${item.product}`}>item.name</Link>

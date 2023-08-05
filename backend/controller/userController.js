@@ -232,36 +232,43 @@ exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
     const newUserData = {
         name: req.body.name,
         email: req.body.email,
-        role:req.body.role,
+        role: req.body.role,
     };
-    
-    const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
-        new: true,
-        runValidators: true,
-        useFindAndModify: false,
-    });
-    if (!user) {
-        return next(
-            new ErrorHandler(`user does not exist with id: ${req.params.id}`,400)
-        );
-    };
+
    
-    res.status(200).json({
-        success: true,
-    })
+        let user = await User.findById(req.params.id);
+
+        if (!user) {
+            return next(
+                new ErrorHandler(`User does not exist with id: ${req.params.id}`, 400)
+            );
+        }
+
+        user = await User.findByIdAndUpdate(req.params.id, newUserData, {
+            new: true,
+            runValidators: true,
+            useFindAndModify: false,
+        });
+
+        res.status(200).json({
+            success: true,
+            user: user, // Return the updated user data to the client
+        });
 });
 
 //Delete User --Admin
 exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
     const user = await User.findById(req.params.id);
 
-    //we will remove cloudinary later.
 
     if (!user) {
         return next(
             new ErrorHandler(`user does not exist with id: ${req.params.id}`,400)
         );
     };
+
+    const imageId = user.avatar.public_id;
+    await cloudinary.v2.uploader.destroy(imageId);
 
     await user.deleteOne()
     res.status(200).json({

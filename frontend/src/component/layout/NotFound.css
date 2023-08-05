@@ -1,0 +1,12 @@
+.pageNotFound {
+    width: 10%;
+    height: 20%;
+    border-bottom: 2px solid gray;
+    text-align: center;
+    align-items: center;
+    margin: 20% 50%;
+}
+.btn {
+    background-color: tomato;
+    color: white;
+}
